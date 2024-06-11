@@ -1,7 +1,7 @@
 {
   "students": [
     {
-      "id": "4",
+      "id": 4,
       "name": "D",
       "email": "cde@gmail.com",
       "address": "HN",
@@ -10,7 +10,7 @@
       "create_at": "05-04-2005"
     },
     {
-      "id": "5",
+      "id": 5,
       "name": "B",
       "email": "ngoc@gmail.com",
       "address": "chung cu s1",
