@@ -71,8 +71,10 @@ export default function GetAllStudents() {
     }
     //delete Student by Id
     const removeStudentbyId=()=>{
+        console.log(student.id);
+        
         axios.delete(`http://localhost:1200/students/${student.id}`)
-        .then(res=>setStudents(res.data))
+        .then(res=>loadData())
         .catch(err=>console.log(err)
         )
         setActiveModal(false)
@@ -99,14 +101,15 @@ export default function GetAllStudents() {
         if(typeSubmit==='add'){
             // call API 'post'
             axios.post('http://localhost:1200/students',student)
-            .then(res=>setStudents(res.data))
+            .then(res=>loadData())
             .catch(err=>console.log(err)
             )
         }else{
-            axios.put(`http://localhost:1200/students/${student.id}`)
-            .then(res=>setStudents(res.data))
+            axios.put(`http://localhost:1200/students/${student.id}`,student)
+            .then(res=>loadData())
             .catch(err=>console.log(err))
         }
+        setActiveModalAdd(false);
     }
     // update Student by Id
     const updateStudentById=(id:number)=>{
@@ -167,7 +170,7 @@ export default function GetAllStudents() {
       </tbody>
     </Table>
     <div style={{marginTop:'20px',display:'flex',justifyContent:'space-between'}}>
-         <div>Hiển thị 2/5 bản ghi</div>
+         <div>Hiển thị 2 bản ghi mỗi trang</div>
          <div> 
             <Button variant="outline-primary" disabled={currentPage==1}>Trước</Button>{' '}
             {pages.map(page => (
