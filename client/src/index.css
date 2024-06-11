@@ -1,0 +1,25 @@
+
+.modal{
+    position: fixed;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    background-color: rgb(19,19,19,0.58);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formModal{
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    background-color: white;
+    animation-name: grow;
+    animation-duration: 0.2s;
+    border-radius: 5px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    padding: 20px;
+}
