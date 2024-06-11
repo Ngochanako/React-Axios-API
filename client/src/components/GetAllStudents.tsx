@@ -45,8 +45,8 @@ export default function GetAllStudents() {
     //Initialization
     const [currentPage,setCurrentPage]=useState<number>(1);
     const pages:number[]=[1,2,3];
-    
-    const totalPages:number=3 
+    const [totalPages,setTotalPages]=useState<number>(0) 
+    const [totalItem,setTotalItem]=useState<number>(0) 
     const handlePage=(page:number)=>{       
         setCurrentPage(page)       
     }
@@ -54,7 +54,11 @@ export default function GetAllStudents() {
      // function load Data from API
      const loadData=()=>{
         axios.get(`http://localhost:1200/students?_page=${currentPage}&_per_page=2`)
-        .then(res=>setStudents(res.data.data))
+        .then(res=>{
+            setStudents(res.data.data);
+            setTotalPages(res.data.pages); 
+            setTotalItem(res.data.items);         
+        })
         .catch(err=>console.log(err)
         )
     }
@@ -170,7 +174,7 @@ export default function GetAllStudents() {
       </tbody>
     </Table>
     <div style={{marginTop:'20px',display:'flex',justifyContent:'space-between'}}>
-         <div>Hiển thị 2 bản ghi mỗi trang</div>
+         <div>Hiển thị 2/{totalItem} bản ghi</div>
          <div> 
             <Button variant="outline-primary" disabled={currentPage==1}>Trước</Button>{' '}
             {pages.map(page => (
@@ -180,6 +184,7 @@ export default function GetAllStudents() {
             }}
             variant="outline-secondary"
             active={page === currentPage}
+            disabled={totalPages<page}
           >
             {page}
           </Button>
